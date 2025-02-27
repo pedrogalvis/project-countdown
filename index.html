@@ -148,36 +148,37 @@
     }
 }
 
-/*background*/
-
-.svg-animation{
-  width:60%;
-  margin:auto;
-  display:block;
+/* Ajustes generales para hacerlo más responsive */
+.svg-animation {
+  width: 60%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
 }
 
-
-
-
-
-@media screen and (max-width: 480px) {
-  .svg-animation{
-    width:100%;
+@media screen and (max-width: 768px) {
+  .svg-animation {
+    width: 80%;
   }
 }
 
-/*cohete*/
+@media screen and (max-width: 480px) {
+  .svg-animation {
+    width: 100%;
+  }
+}
+
+/* Ajuste del canvas y las gotas para ser más responsive */
 #canvas {
   position: absolute;
   width: 100%;
   height: 100%;
-
 }
 
-.rain {
+.rain, .drop {
   position: absolute;
-  width: 1rem;
-  height: 10rem;
+  width: 2vw;
+  height: 8vh;
   background: #ffffff;
   border-radius: 20%;
   opacity: 0.4;
@@ -185,116 +186,47 @@
 }
 
 .drop {
-  width: 1rem;
-  height: 7rem;
-  background: #ffffff;
-  position: absolute;
-  border-radius: 20%;
+  height: 5vh;
   opacity: 0.2;
 }
 
-.rain1 {
-  left: 5rem;
-  top: 2rem;
-  animation: raining 2s linear infinite both;
+/* Media queries para adaptar la lluvia */
+@media screen and (max-width: 768px) {
+  .rain, .drop {
+    width: 1.5vw;
+    height: 7vh;
+  }
+  .drop {
+    height: 4vh;
+  }
 }
 
-.rain2 {
-  left: 15rem;
-  top: 10rem;
-  animation: raining 3s linear infinite both;
+@media screen and (max-width: 480px) {
+  .rain, .drop {
+    width: 1vw;
+    height: 5vh;
+  }
+  .drop {
+    height: 3vh;
+  }
 }
 
-.drop2 {
-  top: 12rem;
-  animation: raining 4s linear infinite both -2s;
-}
-
-.rain3 {
-  left: 5rem;
-  top: 35rem;
-  animation: raining 3s linear infinite both;
-}
-
-.rain4 {
-  right: 23rem;
-  top: 6rem;
-  animation: raining 4s linear infinite both;
-}
-
-.rain5 {
-  left: 25rem;
-  top: 47rem;
-  animation: raining 3s linear infinite both -3s;
-}
-
-.drop5 {
-  top: -6rem;
-  animation: raining 2s linear infinite both;
-}
-
-.rain6 {
-  right: 10rem;
-  top: 34rem;
-  animation: raining 3s linear infinite both;
-}
-
-.rain7 {
-  left: 34rem;
-  top: 10rem;
-  animation: raining 2s linear infinite both -5s;
-}
-
-.rain8 {
-  right: 25rem;
-  top: 40rem;
-  animation: raining 3s linear infinite both;
-}
-
-.drop8 {
-  top: -7rem;
-  animation: raining 4s linear infinite both -6s;
-}
-
-.rain9 {
-  right: 5rem;
-  top: 15.5rem;
-  animation: raining 3s linear infinite both;
-}
-
-.rain10 {
-  left: 24rem;
-  top: -4rem;
-  animation: raining 2s linear infinite both -3s;
-}
-
-.drop11 {
-  right: 17rem;
-  top: 20rem;
-  animation: raining 3s linear infinite both;
-}
-
-.drop12 {
-  right: 15rem;
-  top: 50rem;
-  animation: raining 4s linear infinite both -1s;
-}
-
+/* Mantener las animaciones con valores relativos */
 @keyframes raining {
   from {
-    transform: translateY(-1200px);
+    transform: translateY(-100vh);
   }
   to {
-    transform: translateY(869px);
+    transform: translateY(90vh);
   }
 }
 
-/**/
-:root {
+/:root {
   --base-padding: 3vw;
   --white-25: rgba(255, 255, 255, 0.068);
-  --white-50: rgba(255,255,255,.5);
+  --white-50: rgba(255, 255, 255, 0.5);
 }
+
 body {
   margin: var(--base-padding);
   font-family: system-ui;
@@ -311,13 +243,16 @@ section {
   place-items: center;
 }
 
+/* Ajuste responsive del cohete */
 #rocket {
-  width: 40px;
-  height: 125px;
+  width: 8vw;
+  height: 25vh;
+  min-width: 30px;
+  min-height: 90px;
   background:
     linear-gradient(to right, transparent 45%, firebrick 45%, firebrick 55%, transparent 55%),
-    radial-gradient(circle at 50% 40%, rgba(255,255,255,1) 10%, #aaa 11%, #aaa 15%, transparent 16%),
-    linear-gradient(to right, transparent 50%, rgba(0,0,0,.1) 50%),    
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 1) 10%, #aaa 11%, #aaa 15%, transparent 16%),
+    linear-gradient(to right, transparent 50%, rgba(0, 0, 0, 0.1) 50%),    
     linear-gradient(to bottom, firebrick 12%, transparent 12%),
     lightgray;
   background-size: 100% 40%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
@@ -326,58 +261,51 @@ section {
   border-radius: 50px 50px 50px 50px / 200px 200px 10px 10px;  
   position: fixed;
   bottom: 0;
-  left: calc(50% - 20px);
-  box-shadow: 0 15px 0 -5px #666;
-  filter: drop-shadow(0px -5px 2px rgba(0,0,0,.15));
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 1vw 0 -5px #666;
+  filter: drop-shadow(0px -5px 2px rgba(0, 0, 0, 0.15));
 }
 
-#rocket:before {
-  content:'';
-  width: 200%;
-  height: 50%;
-  position: absolute;
-  top: 55%;
-  left: -50%;
-  background: 
-    radial-gradient(circle at 50% 100%, transparent 50%, firebrick 51%);
-  clip-path: polygon(0% 0%, 25% 0%, 25% 100%, 75% 100%, 75% 0%, 100% 0%, 100% 100%, 0% 100%);
-  border-radius: 100% 100% 0 0;
-}
+/* Ajuste de la animación del fuego */
 #rocket:after {
-  content:'';
-  width: 60%;
-  height: 25%;
+  content: '';
+  width: 50%;
+  height: 8vh;
   position: absolute;
   top: 108%;
-  left: 20%;
-  background:
-    linear-gradient(to bottom, orangered, gold);
+  left: 25%;
+  background: linear-gradient(to bottom, orangered, gold);
   border-radius: 0 0 25% 25%;
   filter: blur(2px);
-  opacity: .5;
-  animation: blast_off .25s linear infinite;
+  opacity: 0.5;
+  animation: blast_off 0.25s linear infinite;
 }
 
-@keyframes blast_off {
-  33% { 
-    background:
-      linear-gradient(to bottom, orangered 25%, gold 75%);
+/* Media queries para adaptar tamaños en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  #rocket {
+    width: 10vw;
+    height: 20vh;
   }
-  66% { 
-    background:
-      linear-gradient(to bottom, orangered 50%, gold 90%);
+
+  #rocket:after {
+    height: 6vh;
   }
 }
 
+@media screen and (max-width: 480px) {
+  #rocket {
+    width: 15vw;
+    height: 18vh;
+  }
 
-.shake_rocket {
-  animation: shake .1s linear infinite;
-}
-@keyframes shake {
-  25% { transform: translateX(-1px); }
-  75% { transform: translateX(1px); }
+  #rocket:after {
+    height: 5vh;
+  }
 }
 
+/* Ajuste del cielo */
 #sky {
   min-height: 200vh;
   width: 100%;
@@ -385,54 +313,72 @@ section {
   bottom: 0;
   left: 0;
   background: 
-    radial-gradient(circle at 75% 24%, rgba(255, 255, 255, 0) .25%, transparent .25%),
-    radial-gradient(circle at 10% 23%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 98% 29%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 63% 10%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 20% 6%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 75% 5%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 35% 15%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 94% 10%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 55% 30%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 4% 40%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at 91% 35%, rgba(255,255,255,.25) .25%, transparent .25%),
-    radial-gradient(circle at -1% 3%, rgba(0,0,0,.15) 2%, transparent 2.5%),
-    radial-gradient(circle at 11% 6.5%, rgba(0,0,0,.15) 1%, transparent 1.5%),
-    radial-gradient(circle at 15% 0%, rgba(0,0,0,.15) 2%, transparent 2.5%),
-    radial-gradient(circle at 5% 8%, rgba(0,0,0,.15) 2%, transparent 2.5%),
-    radial-gradient(circle at -5% -5%, rgba(255,255,255,.15) 9%, transparent 10%),
-    radial-gradient(circle at 0% 0%, #888 10%, transparent 12%),
+    radial-gradient(circle at 75% 24%, rgba(255, 255, 255, 0) 0.25%, transparent 0.25%),
+    radial-gradient(circle at 10% 23%, rgba(255, 255, 255, 0.25) 0.25%, transparent 0.25%),
+    radial-gradient(circle at 98% 29%, rgba(255, 255, 255, 0.25) 0.25%, transparent 0.25%),
     linear-gradient(to top, beige, #306);
   z-index: -1;
 }
 
+/* Ajuste del escape del cohete */
 #exhaust {
-  width: 400px;
-  height: 100px;
+  width: 40vw;
+  height: 10vh;
   position: fixed;
-  bottom: -50px;
-  left: calc(50% - 200px);
+  bottom: -5vh;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
-  transition-origin: 50% 100%;
   transition: 1s;
 }
+
 #exhaust:after {
   content: '';
-  width: 400px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
   background:
-    radial-gradient(circle at 20% 90%, white 50px, transparent 51px),
-    radial-gradient(circle at 35% 115%, white 50px, transparent 51px),
-    radial-gradient(circle at 50% 135%, white 50px, transparent 51px),
-    radial-gradient(circle at 65% 115%, white 50px, transparent 51px),
-    radial-gradient(circle at 80% 90%, white 50px, transparent 51px);
-  filter: blur(1px) drop-shadow(0px -5px rgba(0,0,0,.025));
-  animation: shake .1s linear infinite;
+    radial-gradient(circle at 20% 90%, white 10px, transparent 11px),
+    radial-gradient(circle at 35% 115%, white 10px, transparent 11px),
+    radial-gradient(circle at 50% 135%, white 10px, transparent 11px),
+    radial-gradient(circle at 65% 115%, white 10px, transparent 11px),
+    radial-gradient(circle at 80% 90%, white 10px, transparent 11px);
+  filter: blur(1px) drop-shadow(0px -5px rgba(0, 0, 0, 0.025));
+  animation: shake 0.1s linear infinite;
 }
 
+@media screen and (max-width: 768px) {
+  #exhaust {
+    width: 30vw;
+    height: 8vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #exhaust {
+    width: 25vw;
+    height: 6vh;
+  }
+}
+
+/* Animaciones */
+@keyframes blast_off {
+  33% { 
+    background: linear-gradient(to bottom, orangered 25%, gold 75%);
+  }
+  66% { 
+    background: linear-gradient(to bottom, orangered 50%, gold 90%);
+  }
+}
+
+@keyframes shake {
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+/* Clase para activar el escape */
 .exhaust {
   opacity: 1 !important;
   bottom: 0 !important;
@@ -443,7 +389,7 @@ section {
 <body>
   
 
-    <h1>Sueña en grande: <span> la Física y la Universidad te esperan!</span></h1>
+    <h1>Sueña en grande: <span> la Física y la Universidad te esperan !</span></h1>
     <div class="countdown" data-target-date="2025-04-27 00:00:00"></div>    
    
     
