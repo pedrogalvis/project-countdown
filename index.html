@@ -484,11 +484,11 @@ section {
     <section></section>
     <section></section>
 
-    <quote class="bible" id="bibleQuote">
-        Sabiduría ante todo; adquiere sabiduría;  
-        Y sobre todas tus posesiones adquiere inteligencia.  
-        <span>— Proverbios 4:7 (RVR1960)</span>
-    </quote>
+   <quote class="bible" id="bibleQuote">
+  <span id="verse"></span><br>
+  <span id="reference"></span>
+</quote>
+
 
     <footer>
       <svg class="svg-animation" viewBox="0 0 1000 650" style="enable-background:new 0 0 1000 650;" xml:space="preserve">
@@ -953,6 +953,29 @@ function getRemainingTime(target, parts, first = true) {
     const counterElement = document.getElementById("counter");
 
     // Verificar si hoy está en el rango
+    const startDate = new Date("2025-10-01T00:00:00");
+const endDate = new Date("2026-03-01T00:00:00");
+const today = new Date();
+
+const verseElement = document.getElementById("verse");
+const referenceElement = document.getElementById("reference");
+
+function showDailyVerse() {
+  if (today >= startDate && today <= endDate) {
+    const daysSinceStart = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+    const verseIndex = daysSinceStart % bibleVerses.length;
+    const verse = bibleVerses[verseIndex];
+    
+    verseElement.textContent = verse.text;
+    referenceElement.textContent = `— ${verse.reference} (RVR1960)`;
+  } else {
+    verseElement.textContent = "Fuera del rango de fechas.";
+    referenceElement.textContent = "";
+  }
+}
+
+showDailyVerse();
+
 </script>
 <script>
   // Cohete
@@ -1012,6 +1035,7 @@ window.addEventListener('scroll', function(e){
 
 </body>
 </html>
+
 
 
 
