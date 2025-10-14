@@ -818,19 +818,19 @@ section {
       
 
 <script>
-const countdownEls = document.querySelectorAll(".countdown")
-countdownEls.forEach(countdownEl => createCountdown(countdownEl))
+const countdownEls = document.querySelectorAll(".countdown");
+countdownEls.forEach(countdownEl => createCountdown(countdownEl));
 
-function createCountdown(countdownEl){
-  const target = new Date(new Date(countdownEl.dataset.targetDate).toLocaleString('en', ))
+function createCountdown(countdownEl) {
+  const target = new Date(countdownEl.dataset.targetDate);
   const parts = {
-    days: {text: ["días","day"], dots: 30},
-    hours: {text: ["horas","hour"], dots: 24},
-    minutes: {text: ["minutos","minute"], dots: 60},
-    seconds: {text: ["segundos","second"], dots: 60},
-  }
+    days: { text: ["días", "día"], dots: 30 },
+    hours: { text: ["horas", "hora"], dots: 24 },
+    minutes: { text: ["minutos", "minuto"], dots: 60 },
+    seconds: { text: ["segundos", "segundo"], dots: 60 },
+  };
 
-  Object.entries(parts).forEach(([key, value])=>{
+  Object.entries(parts).forEach(([key, value]) => {
     const partEl = document.createElement("div");
     partEl.classList.add("part", key);
     partEl.style.setProperty("--dots", value.dots);
@@ -841,50 +841,58 @@ function createCountdown(countdownEl){
     remainingEl.innerHTML = `
       <span class="number"></span>
       <span class="text"></span>
-    `
+    `;
     partEl.append(remainingEl);
-    for(let i = 0; i < value.dots; i++){
+
+    for (let i = 0; i < value.dots; i++) {
       const dotContainerEl = document.createElement("div");
       dotContainerEl.style.setProperty("--dot-idx", i);
-      dotContainerEl.classList.add("dot-container")
+      dotContainerEl.classList.add("dot-container");
       const dotEl = document.createElement("div");
-      dotEl.classList.add("dot")
+      dotEl.classList.add("dot");
       dotContainerEl.append(dotEl);
       partEl.append(dotContainerEl);
     }
+
     countdownEl.append(partEl);
-  })
-  getRemainingTime(target, parts)
+  });
+
+  getRemainingTime(target, parts);
 }
 
-function getRemainingTime(target, parts, first=true){
-  const now = new Date()
-  if(first) console.log({target, now})
-  const remaining = {}
-  let seconds = Math.floor((target - (now))/1000);
-  let minutes = Math.floor(seconds/60);
-  let hours = Math.floor(minutes/60);
-  let days = Math.floor(hours/24);
-  hours = hours-(days*24);
-  minutes = minutes-(days*24*60)-(hours*60);
-  seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
-  Object.entries({days, hours, minutes, seconds}).forEach(([key, value])=>{
+function getRemainingTime(target, parts, first = true) {
+  const now = new Date();
+  if (first) console.log({ target, now });
+
+  let seconds = Math.floor((target - now) / 1000);
+  if (seconds < 0) seconds = 0;
+
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  const timeParts = { days, hours, minutes, seconds: secs };
+
+  Object.entries(timeParts).forEach(([key, value]) => {
     const remaining = parts[key].element.querySelector(".number");
     const text = parts[key].element.querySelector(".text");
     remaining.innerText = value;
-    text.innerText = parts[key].text[Number(value==1)]
-    const dots = parts[key].element.querySelectorAll(".dot")
-    dots.forEach((dot, idx)=>{
-      dot.dataset.active = idx <= value;
-      dot.dataset.lastactive = idx == value;
-    })
-  })
-  if(now <= target){
-    window.requestAnimationFrame(()=>{
-      getRemainingTime(target, parts, false)
+    text.innerText = parts[key].text[Number(value === 1)];
+
+    const dots = parts[key].element.querySelectorAll(".dot");
+    dots.forEach((dot, idx) => {
+      dot.dataset.active = idx < value;
+      dot.dataset.lastactive = idx === value - 1;
     });
+  });
+
+  if (seconds > 0) {
+    requestAnimationFrame(() => getRemainingTime(target, parts, false));
   }
 }
+</script>
+
 
 </script>
 
@@ -1002,6 +1010,7 @@ window.addEventListener('scroll', function(e){
 
 </body>
 </html>
+
 
 
 
