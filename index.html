@@ -888,8 +888,8 @@ function getRemainingTime(target, parts, first=true){
 
 </script>
 
- <script>
-    // Versículos RV1960
+<script>
+    // Lista de versículos de la Reina-Valera 1960 (sabiduría, inteligencia, ciencia y bendiciones)
     const bibleVerses = [
       { text: "Sabiduría ante todo; adquiere sabiduría; Y sobre todas tus posesiones adquiere inteligencia.", reference: "Proverbios 4:7" },
       { text: "Porque Jehová da la sabiduría, Y de su boca viene el conocimiento y la inteligencia.", reference: "Proverbios 2:6" },
@@ -919,7 +919,18 @@ function getRemainingTime(target, parts, first=true){
       { text: "Jehová es mi pastor; nada me faltará.", reference: "Salmos 23:1" },
       { text: "Bueno es Jehová a los que en él esperan, al alma que le busca.", reference: "Lamentaciones 3:25" },
       { text: "El temor de Jehová es manantial de vida Para apartarse de los lazos de la muerte.", reference: "Proverbios 14:27" },
-      { text: "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida, Y en la casa de Jehová moraré por largos días.", reference: "Salmos 23:6" }
+      { text: "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida, Y en la casa de Jehová moraré por largos días.", reference: "Salmos 23:6" },
+      { text: "A Jehová he puesto siempre delante de mí; Porque está a mi diestra, no seré conmovido.", reference: "Salmos 16:8" },
+      { text: "Gustad, y ved que es bueno Jehová; Dichoso el hombre que confía en él.", reference: "Salmos 34:8" },
+      { text: "Los que miraron a él fueron alumbrados, Y sus rostros no fueron avergonzados.", reference: "Salmos 34:5" },
+      { text: "El ángel de Jehová acampa alrededor de los que le temen, Y los defiende.", reference: "Salmos 34:7" },
+      { text: "El que habita al abrigo del Altísimo Morará bajo la sombra del Omnipotente.", reference: "Salmos 91:1" },
+      { text: "Diré yo a Jehová: Esperanza mía, y castillo mío; Mi Dios, en quien confiaré.", reference: "Salmos 91:2" },
+      { text: "Con sus plumas te cubrirá, Y debajo de sus alas estarás seguro; Escudo y adarga es su verdad.", reference: "Salmos 91:4" },
+      { text: "No se turbe vuestro corazón; creéis en Dios, creed también en mí.", reference: "Juan 14:1" },
+      { text: "Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.", reference: "Juan 14:6" },
+      { text: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", reference: "Mateo 11:28" },
+      { text: "Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas.", reference: "Mateo 11:29" }
     ];
 
     // Fechas de inicio y fin
@@ -932,21 +943,6 @@ function getRemainingTime(target, parts, first=true){
     const counterElement = document.getElementById("counter");
 
     // Verificar si hoy está en el rango
-    if (today >= startDate && today <= endDate) {
-      // Calcular número de día desde el inicio (día 1 = 01 de octubre 2025)
-      const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-      
-      // Usar versículo del día, rotando si hay más días que versículos
-      const verseIndex = daysPassed % bibleVerses.length;
-      const verse = bibleVerses[verseIndex];
-
-      verseElement.textContent = `"${verse.text}"`;
-      referenceElement.textContent = `— ${verse.reference}`;
-      counterElement.textContent = `Día ${daysPassed + 1} de ${Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24))} (${today.toLocaleDateString()})`;
-    } else {
-      verseElement.textContent = "Este programa de versículos está disponible del 01 de octubre de 2025 al 01 de marzo de 2026.";
-    }
-  </script>
 
 <script>
   // Cohete
