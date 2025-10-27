@@ -922,9 +922,10 @@ section {
       { text: "Jesús le dijo: Yo soy el camino, y la verdad, y la vida...", reference: "Juan 14:6" }
     ];
 
-    const startDate = new Date("2025-10-01T00:00:00");
-    const endDate = new Date("2026-03-01T00:00:00");
-    const today = new Date();
+    const startDate = new Date(); // fecha actual
+const endDate = new Date("2026-02-27T00:00:00"); // 27 de febrero de 2026
+const today = new Date();
+
 
     const verseElement = document.getElementById("verse");
     const referenceElement = document.getElementById("reference");
@@ -1006,6 +1007,7 @@ window.addEventListener('scroll', function(e){
 
 </body>
 </html>
+
 
 
 
