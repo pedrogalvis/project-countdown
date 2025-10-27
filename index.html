@@ -451,7 +451,7 @@ section {
   <div class="un-pdf" style="margin-top: 1rem;">
     <embed src="./resultados.pdf"
            type="application/pdf"
-           width="110%"
+           width="150%"
            height="600px"
            style="border: 1px solid #ccc; border-radius: 4px;">
   </div>
@@ -922,9 +922,15 @@ section {
       { text: "Jesús le dijo: Yo soy el camino, y la verdad, y la vida...", reference: "Juan 14:6" }
     ];
 
-    const startDate = new Date(); // fecha actual
-const endDate = new Date("2026-02-27T00:00:00"); // 27 de febrero de 2026
+const startDate = new Date(); // fecha actual
+const endDate = new Date(2026, 1, 27); // 27 febrero 2026 (mes 1 = febrero)
 const today = new Date();
+
+const diff = endDate - today;
+const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+console.log(`Faltan ${days} días para el 27 de febrero de 2026.`);
+
 
 
     const verseElement = document.getElementById("verse");
@@ -1007,6 +1013,7 @@ window.addEventListener('scroll', function(e){
 
 </body>
 </html>
+
 
 
 
